@@ -1,9 +1,18 @@
 .widgets {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  grid-gap: 20px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 20px;
 }
-.frame{ 
-  background-color: #fff;
-  padding: 20px;
+.frame {
+	background-color: #fff;
+	padding: 20px;
+	&__uv {
+		width: 200px;
+		height: 100px; /* as the half of the width */
+		background-color: gold;
+		border-top-left-radius: 110px; /* 100px of height + 10px of border */
+		border-top-right-radius: 110px; /* 100px of height + 10px of border */
+		border: 10px solid gray;
+		border-bottom: 0;
+	}
 }

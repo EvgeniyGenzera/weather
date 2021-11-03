@@ -1,8 +1,11 @@
 import React from 'react';
+import { useAppSelector } from '../../core/hooks/redux';
 import Frame from '../WhetherFrame/Frame';
 import style from './Header.module.scss';
 
 const Header = () => {
+	const { weather } = useAppSelector(state => state.weatherReducer);
+	console.log(weather);
 	return (
 		<div className={style.header}>
 			<div className={style.btns}>

@@ -1,38 +1,58 @@
-import React from 'react';
-import Header from './components/Header.vue/Header';
+import React, { useCallback, useState } from 'react';
+import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
-import { GoogleMap, Marker, withScriptjs, withGoogleMap } from 'react-google-maps';
 import Widgets from './components/Widgets/Widgets';
 import { weatherAPI } from './core/services/WeatherSerices';
+import { useAppDispatch, useAppSelector } from './core/hooks/redux';
+import { setWeather } from './store/reducers/WeatherSlice';
+import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
 
 const App = () => {
-	const { data: oneDay } = weatherAPI.useFetchOneDayQuery('Kyiv');
-	const Map = () => {
-		if (oneDay) {
-			return (
-				<GoogleMap defaultZoom={10} defaultCenter={{ lat: oneDay.coord.lat, lng: oneDay.coord.lon }}>
-					<Marker key={oneDay.sys.id} position={{ lat: oneDay.coord.lat, lng: oneDay.coord.lon }} />
-				</GoogleMap>
-			);
-		}
-		return <></>;
+	const { placeRequest, weather } = useAppSelector(state => state.weatherReducer);
+	const { data: oneCall } = weatherAPI.useFetchOneCallApiQuery(placeRequest);
+	const dispatch = useAppDispatch();
+	const containerStyle = {
+		width: '400px',
+		height: '400px',
 	};
-	const WrappedMap = withScriptjs(withGoogleMap(Map));
+	const { isLoaded } = useJsApiLoader({
+		id: 'google-map-script',
+		googleMapsApiKey: 'AIzaSyDUILv-EyaZ4PI2RmOCbvxDudIIozWF5io',
+	});
+	const [map, setMap] = useState(null);
+	const onLoad = useCallback(function callback(map) {
+		const bounds = new window.google.maps.LatLngBounds();
+		map.fitBounds(bounds);
+		setMap(map);
+	}, []);
+	const onUnmount = useCallback(function callback(map) {
+		setMap(null);
+	}, []);
+	const center = {
+		lat: placeRequest.lat,
+		lng: placeRequest.lng,
+	};
+	if (oneCall) {
+		dispatch(setWeather(oneCall));
+	}
 	return (
 		<div className="container">
-			<Sidebar />
+			{oneCall && <Sidebar />}
 			<div>
 				<Header />
 				<h2>Today`s Highlights</h2>
 				<div className="container__content">
 					<Widgets />
 					<div>
-						<WrappedMap
-							googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDUILv-EyaZ4PI2RmOCbvxDudIIozWF5io"
-							loadingElement={<div style={{ height: `100%` }} />}
-							containerElement={<div style={{ height: `400px` }} />}
-							mapElement={<div style={{ height: `100%` }} />}
-						/>
+						<GoogleMap
+							mapContainerStyle={containerStyle}
+							center={center}
+							zoom={11}
+							onLoad={onLoad}
+							onUnmount={onUnmount}
+						>
+							<Marker position={center} />
+						</GoogleMap>
 					</div>
 				</div>
 			</div>
