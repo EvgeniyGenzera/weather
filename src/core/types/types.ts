@@ -48,7 +48,7 @@ export interface ITempWeather {
 }
 export interface IHourlyWeather {
 	dt: number;
-	temp: ITempWeather;
+	temp: number;
 	weather: IWeatherIcons[];
 }
 interface IWeatherIcons {

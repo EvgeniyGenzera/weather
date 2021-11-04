@@ -39,7 +39,7 @@ const App = () => {
 		<div className="container">
 			{oneCall && <Sidebar />}
 			<div>
-				<Header />
+				{oneCall && <Header />}
 				<h2>Today`s Highlights</h2>
 				<div className="container__content">
 					<Widgets />

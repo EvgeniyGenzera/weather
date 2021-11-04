@@ -22,3 +22,17 @@ code {
 		padding-bottom: 30px;
 	}
 }
+.slick-slider {
+	overflow: hidden;
+	padding: 0 10px 0 40px;
+}
+.slick-next {
+	position: absolute;
+	right: 0;
+	z-index: 9999;
+}
+.slick-prev {
+	position: absolute;
+	left: 0;
+	z-index: 9999;
+}

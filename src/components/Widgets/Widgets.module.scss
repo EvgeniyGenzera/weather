@@ -5,14 +5,105 @@
 }
 .frame {
 	background-color: #fff;
-	padding: 20px;
+	padding: 30px;
 	&__uv {
-		width: 200px;
-		height: 100px; /* as the half of the width */
-		background-color: gold;
-		border-top-left-radius: 110px; /* 100px of height + 10px of border */
-		border-top-right-radius: 110px; /* 100px of height + 10px of border */
-		border: 10px solid gray;
-		border-bottom: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: relative;
+		height: 100%;
+	}
+
+	&__sunInfo {
+		p {
+			display: flex;
+			align-items: center;
+		}
+		img {
+			margin-right: 10px;
+			width: 40px;
+			height: 40px;
+		}
+	}
+	&__humudity {
+		border: 1px solid silver;
+		border-radius: 20px;
+		width: 20px;
+		height: 60px;
+		padding: 3px;
+		display: flex;
+		justify-content: center;
+		div {
+			width: 90%;
+			height: 100%;
+			border-radius: 10px;
+		}
+	}
+}
+.gradient {
+	position: relative;
+}
+svg {
+	transform: rotate(180deg);
+}
+.humudity {
+	display: flex;
+	justify-content: space-between;
+}
+path {
+	fill: none;
+	stroke: url(#orange-to-pink);
+	stroke-width: 8;
+	stroke-linecap: round;
+	pointer-events: none;
+	border: 1px solid #000;
+}
+.firstIndex {
+	position: absolute;
+	left: -15px;
+	bottom: 30px;
+	color: silver;
+}
+.secondIndex {
+	position: absolute;
+	top: -20%;
+	left: 30%;
+	color: silver;
+}
+.thirdIndex {
+	position: absolute;
+	top: -20%; /* position the top  edge of the element at the middle of the parent */
+	right: 30%;
+	color: silver;
+}
+.lastIndex {
+	position: absolute;
+	right: -20px;
+	bottom: 30px;
+	color: silver;
+}
+.mainIndex {
+	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+	top: 50%; /* position the top  edge of the element at the middle of the parent */
+	right: 27%;
+	color: #000;
+	font-size: 30px;
+}
+h2 {
+	margin: 0;
+}
+
+.temperature{
+	p{
+		display: flex;
+		align-items: center;
+		font-size: 16px;
+	}
+	img{
+		margin-right: 10px;
+		width: 40px;
+		height: 40px;
 	}
 }

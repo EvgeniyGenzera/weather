@@ -2,34 +2,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ICoord, IWeather } from '../../core/types/types';
 
 interface WeatherState {
-	weather: IWeather;
+	weather: IWeather | null;
 	isLoading: boolean;
 	placeRequest: ICoord;
 	currentName: string;
 }
 
 const initialState: WeatherState = {
-	weather: {
-		current: {
-			clouds: 0,
-			dew_point: 0,
-			dt: 0,
-			feels_like: 0,
-			humidity: 0,
-			pressure: 0,
-			sunrise: 0,
-			sunset: 0,
-			temp: 0,
-			uvi: 0,
-			visibility: 0,
-			weather: [],
-			wind_deg: 0,
-			wind_gust: 0,
-			wind_speed: 0,
-		},
-		daily: [],
-		hourly: [],
-	},
+	weather: null,
 	currentName: 'Kiev, UA',
 	placeRequest: {
 		lat: 50.4333,
