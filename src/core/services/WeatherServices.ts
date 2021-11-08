@@ -9,11 +9,6 @@ export const weatherAPI = createApi({
 				url: `weather?lat=${arg.lat}&lon=${arg.lng}&appid=6bf7ff90ae50cf1d91e8c6b3deef0bb8`,
 			}),
 		}),
-		// fetchOneWeek: build.query<IWeather, ICoord>({
-		// 	query: arg => ({
-		// 		url: `forecast?lat=${arg.lat}&lon=${arg.lng}&appid={API key}`,
-		// 	}),
-		// }),
 		fetchOneCallApi: build.query<IWeather, ICoord>({
 			query: arg => ({
 				url: `onecall?lat=${arg.lat}&lon=${arg.lng}&exclude=minutely&appid=6bf7ff90ae50cf1d91e8c6b3deef0bb8`,

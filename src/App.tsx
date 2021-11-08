@@ -2,10 +2,10 @@ import { useCallback, useState } from 'react';
 import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
 import Widgets from './components/Widgets/Widgets';
-import { weatherAPI } from './core/services/WeatherSerices';
+import { weatherAPI } from './core/services/WeatherServices';
 import { useAppDispatch, useAppSelector } from './core/hooks/redux';
 import { setCurrentName, setWeather } from './store/reducers/WeatherSlice';
-import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, Marker } from '@react-google-maps/api';
 
 const App = () => {
 	const { placeRequest } = useAppSelector(state => state.weatherReducer);
@@ -13,15 +13,6 @@ const App = () => {
 	const { data: singleDay } = weatherAPI.useFetchOneDayQuery(placeRequest);
 	const [sidebarOpened, setSidebarOpened] = useState(false);
 	const dispatch = useAppDispatch();
-	const containerStyle = {
-		width: '100%',
-		height: '100%',
-		borderRadius: '30px',
-	};
-	const { isLoaded } = useJsApiLoader({
-		id: 'google-map-script',
-		googleMapsApiKey: 'AIzaSyDUILv-EyaZ4PI2RmOCbvxDudIIozWF5io',
-	});
 	const [map, setMap] = useState(null);
 	const onLoad = useCallback(function callback(map) {
 		const bounds = new window.google.maps.LatLngBounds();
@@ -31,11 +22,6 @@ const App = () => {
 	const onUnmount = useCallback(function callback(map) {
 		setMap(null);
 	}, []);
-	const center = {
-		lat: placeRequest.lat,
-		lng: placeRequest.lng,
-	};
-
 	if (oneCall && singleDay) {
 		dispatch(setWeather(oneCall));
 		dispatch(setCurrentName(`${singleDay.name}, ${singleDay.sys.country}`));
@@ -58,13 +44,21 @@ const App = () => {
 					<Widgets />
 					<div className="googleMap">
 						<GoogleMap
-							mapContainerStyle={containerStyle}
-							center={center}
+							mapContainerStyle={{ width: '100%', height: '100%', borderRadius: '30px' }}
+							center={{
+								lat: placeRequest.lat,
+								lng: placeRequest.lng,
+							}}
 							zoom={11}
 							onLoad={onLoad}
 							onUnmount={onUnmount}
 						>
-							<Marker position={center} />
+							<Marker
+								position={{
+									lat: placeRequest.lat,
+									lng: placeRequest.lng,
+								}}
+							/>
 						</GoogleMap>
 					</div>
 				</div>

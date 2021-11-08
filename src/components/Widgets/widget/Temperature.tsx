@@ -1,4 +1,3 @@
-import React from 'react';
 import { useAppSelector } from '../../../core/hooks/redux';
 import style from '../Widgets.module.scss';
 import maxTemp from '../../../assets/images/icons/hot.png';

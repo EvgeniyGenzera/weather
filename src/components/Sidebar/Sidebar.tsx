@@ -1,17 +1,14 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import style from './sidebar.module.scss';
 import { formatDate } from '../../core/utils/utils';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import { useAppDispatch, useAppSelector } from '../../core/hooks/redux';
-
 import { setPlaceRequest } from '../../store/reducers/WeatherSlice';
-import { weatherAPI } from '../../core/services/WeatherSerices';
 export interface sidebarProps {
 	sidebarOpened: boolean;
 }
 const Sidebar: FC<sidebarProps> = ({ sidebarOpened }) => {
-	const { weather, currentName, placeRequest } = useAppSelector(state => state.weatherReducer);
-	const { data: singleDay } = weatherAPI.useFetchOneDayQuery(placeRequest);
+	const { weather, currentName } = useAppSelector(state => state.weatherReducer);
 	const [address, setAddress] = useState('');
 	const dispatch = useAppDispatch();
 	const getUserLocation = () => {
@@ -26,6 +23,11 @@ const Sidebar: FC<sidebarProps> = ({ sidebarOpened }) => {
 			}
 		);
 	};
+
+	useEffect(() => {
+		setAddress(currentName);
+	}, [currentName]);
+
 	const handleSelect = async (value: any) => {
 		geocodeByAddress(value)
 			.then(results => {

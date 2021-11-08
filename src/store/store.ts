@@ -1,4 +1,4 @@
-import { weatherAPI } from '../core/services/WeatherSerices';
+import { weatherAPI } from '../core/services/WeatherServices';
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import weatherReducer from './reducers/WeatherSlice';
 

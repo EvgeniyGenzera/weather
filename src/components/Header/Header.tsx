@@ -1,8 +1,9 @@
-import React, { useState, FC } from 'react';
+import { useState, FC } from 'react';
 import { useAppSelector } from '../../core/hooks/redux';
 import Frame from '../WhetherFrame/Frame';
 import style from './Header.module.scss';
 import Slider from 'react-slick';
+import { sliderSettings as settings } from '../../core/utils/utils';
 
 export interface headerProps {
 	setSidebarOpened: (value: boolean) => void;
@@ -11,41 +12,6 @@ export interface headerProps {
 
 const Header: FC<headerProps> = ({ sidebarOpened, setSidebarOpened }) => {
 	const { weather } = useAppSelector(state => state.weatherReducer);
-	const settings = {
-		dots: false,
-		infinite: false,
-		speed: 500,
-		slidesToShow: 5,
-		slidesToScroll: 1,
-		arrows: true,
-		responsive: [
-			{
-				breakpoint: 1204,
-				settings: {
-					slidesToShow: 4,
-				},
-			},
-			{
-				breakpoint: 1024,
-				settings: {
-					slidesToShow: 3,
-				},
-			},
-			{
-				breakpoint: 600,
-				settings: {
-					slidesToShow: 2,
-					slidesToScroll: 2,
-				},
-			},
-			{
-				breakpoint: 480,
-				settings: {
-					slidesToShow: 1,
-				},
-			},
-		],
-	};
 	const [view, setView] = useState(true);
 	const [tempType, setTempType] = useState(true);
 	return (
