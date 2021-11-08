@@ -22,17 +22,17 @@ const Humidity = () => {
 
 	return (
 		<div className={style.frame}>
-			<h2>Wind Status</h2>
+			<h3>Humudity</h3>
 			{weather && (
 				<div className={style.humudity}>
-					<div>
+					<div className={style.humudity__percent}>
 						<p>
 							<span>{weather.current.humidity}</span> %
 						</p>
 						<p>{humidityLevel}</p>
 					</div>
 					<div className={style.frame__humudity}>
-						<div style={{ background: `linear-gradient(360deg, blue ${weather.current.humidity}%, #fff 50%)` }}></div>
+						<div style={{ background: `linear-gradient(360deg, #08E ${weather.current.humidity}%, #fff 50%)` }}></div>
 					</div>
 				</div>
 			)}

@@ -6,9 +6,9 @@ const WindStatus = () => {
 	const { weather } = useAppSelector(state => state.weatherReducer);
 	return (
 		<div className={style.frame}>
-			<h2>Wind Status</h2>
+			<h3>Wind Status</h3>
 			{weather && (
-				<div>
+				<div className={style.windStatus}>
 					<p>
 						<span>{weather.current.wind_speed}</span> km/h
 					</p>

@@ -2,6 +2,7 @@ export interface IWeather {
 	current: ICurrentWeather;
 	daily: IDailyWeather[];
 	hourly: IHourlyWeather[];
+	timezone: string;
 }
 export interface ICurrentWeather {
 	clouds: number;
@@ -37,6 +38,14 @@ export interface IDailyWeather {
 	wind_deg: number;
 	wind_gust: number;
 	wind_speed: number;
+}
+export interface ICurrentName {
+	name: string;
+	sys: {
+		country: string;
+	};
+	timezone: number;
+	dt: number;
 }
 export interface ITempWeather {
 	day: number;

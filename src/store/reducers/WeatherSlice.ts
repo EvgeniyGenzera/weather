@@ -15,7 +15,7 @@ const initialState: WeatherState = {
 		lat: 50.4333,
 		lng: 30.5167,
 	},
-	isLoading: false,
+	isLoading: true,
 };
 
 export const weatherSlice = createSlice({
@@ -24,6 +24,9 @@ export const weatherSlice = createSlice({
 	reducers: {
 		setPlaceRequest(state, action: PayloadAction<ICoord>) {
 			state.placeRequest = action.payload;
+		},
+		setLoading(state, action: PayloadAction<boolean>) {
+			state.isLoading = action.payload;
 		},
 		setWeather(state, action: PayloadAction<IWeather>) {
 			state.weather = action.payload;

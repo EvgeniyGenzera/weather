@@ -10,7 +10,7 @@ const SunInfo = () => {
 	const sunset = useMemo(() => (!weather ? new Date() : new Date(weather.current.sunset * 1000)), [weather]);
 	return (
 		<div className={style.frame}>
-			<h2>Sunrise & Sunset</h2>
+			<h3>Sunrise & Sunset</h3>
 			{weather && (
 				<div className={style.frame__sunInfo}>
 					<p>

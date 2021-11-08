@@ -6,9 +6,9 @@ const Visibility = () => {
 	const { weather } = useAppSelector(state => state.weatherReducer);
 	return (
 		<div className={style.frame}>
-			<h2>Visibility</h2>
+			<h3>Visibility</h3>
 
-			<div>
+			<div className={style.visibility}>
 				<span>{weather?.current?.visibility || 0}</span> Average visibility, metres
 			</div>
 		</div>
